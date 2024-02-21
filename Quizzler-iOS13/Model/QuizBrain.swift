@@ -11,6 +11,7 @@ import Foundation
 struct QuizBrain {
     
     var questionNumber = 0
+    var score: Int = 0
     
     let quiz = [
         Question(q: "Nithin's nickname is ANNAYYA", a: "True"),
@@ -28,9 +29,10 @@ struct QuizBrain {
         
     ]
     
-    func checkAnswer(_ userAnswer: String) -> Bool {
+    mutating func checkAnswer(_ userAnswer: String) -> Bool {
         let actualAnswer = quiz[questionNumber].answer
         if userAnswer == actualAnswer {
+            score += 1
             return true
         }
         else {
@@ -54,7 +56,12 @@ struct QuizBrain {
             //print(questionNumber)
         }
         else {
+            score = 0
             questionNumber = 0
         }
+    }
+    
+    mutating func getScore() -> Int {
+        return score
     }
 }
