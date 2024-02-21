@@ -8,8 +8,10 @@
 
 import Foundation
 
-struct quiz {
+struct QuizBrain {
+    
     var questionNumber = 0
+    
     let quiz = [
         Question(q: "Nithin's nickname is ANNAYYA", a: "True"),
         Question(q: "DP loves/lives movies", a: "True"),
@@ -25,4 +27,34 @@ struct quiz {
         Question(q: "Chocolate affects a dog's heart and nervous system; a few ounces are enough to kill a small dog.", a: "True")
         
     ]
+    
+    func checkAnswer(_ userAnswer: String) -> Bool {
+        let actualAnswer = quiz[questionNumber].answer
+        if userAnswer == actualAnswer {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+    func getQuestionText() -> String {
+        return quiz[questionNumber].question
+    }
+    
+    func getProgress() -> Float {
+        let progress = Float(questionNumber + 1) / Float(quiz.count)
+        return progress
+    }
+    
+    mutating func nextQuestion() {
+        //Quiz progression
+        if questionNumber < quiz.count-1 {
+            questionNumber += 1
+            //print(questionNumber)
+        }
+        else {
+            questionNumber = 0
+        }
+    }
 }
